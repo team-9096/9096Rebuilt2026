@@ -6,11 +6,8 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
 import swervelib.SwerveInputStream;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -23,8 +20,6 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-
   private final CommandXboxController driverController =
     new CommandXboxController(OperatorConstants.DRIVER_CONTROLLER_PORT);
 
@@ -64,7 +59,7 @@ public class RobotContainer {
     driveAngularVelocity.copy().robotRelative(true)
                                .allianceRelativeControl(false);
 
-  SwerveInputStream driveAngularVelocityKeyboard = 
+  /*SwerveInputStream driveAngularVelocityKeyboard = 
     SwerveInputStream.of(drivebase.getSwerveDrive(),
                          () -> -driverController.getLeftY(),
                          () -> -driverController.getLeftX())
@@ -72,16 +67,16 @@ public class RobotContainer {
                                                  2))
                      .deadband(OperatorConstants.DEADBAND)
                      .scaleTranslation(0.8)
-                     .allianceRelativeControl(true);
+                     .allianceRelativeControl(true);*/
   
   // Derive the heading axis with math!
-  SwerveInputStream driveDirectAngleKeyboard = 
+  /*SwerveInputStream driveDirectAngleKeyboard = 
     driveAngularVelocityKeyboard.copy().withControllerHeadingAxis(
       () -> Math.sin(driverController.getRawAxis(2) * Math.PI) * (Math.PI * 2),
       () -> Math.cos(driverController.getRawAxis(2) * Math.PI) * (Math.PI * 2))
                                        .headingWhile(true)
                                        .translationHeadingOffset(true)
-                                       .translationHeadingOffset(Rotation2d.fromDegrees(0));
+                                       .translationHeadingOffset(Rotation2d.fromDegrees(0));*/
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -101,12 +96,11 @@ public class RobotContainer {
    */
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    new Trigger(m_exampleSubsystem::exampleCondition)
-        .onTrue(new ExampleCommand(m_exampleSubsystem));
+    drivebase.setDefaultCommand(drivebase.driveFieldOriented(driveAngularVelocity));
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
-    driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
+    //driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
   }
 
   /**
@@ -116,6 +110,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return Autos.exampleAuto(m_exampleSubsystem);
+    return Autos.exampleAuto();
   }
 }
