@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.function.Supplier;
 
 import edu.wpi.first.wpilibj.Filesystem;
@@ -24,16 +25,14 @@ public class SwerveSubsystem extends SubsystemBase {
     private SwerveDrive swerveDrive;
 
     /**
-     * Constructor for the Swerve Subsystem
+     * Constructor for the Swerve Subsystem 
      */
     public SwerveSubsystem () {
-        try{
-            File swerveJsonDirectory = new File(Filesystem.getDeployDirectory(),"swerve");
-            swerveDrive = new SwerveParser(swerveJsonDirectory).createSwerveDrive(Constants.MAX_SPEED);
-        }
-        catch(Exception e) { 
-            throw new RuntimeException();
-        }
+        try {
+          swerveDrive = new SwerveParser(new File(Filesystem.getDeployDirectory(),"swerve")).createSwerveDrive(Constants.MAX_SPEED);
+        } catch (IOException e) {
+          e.printStackTrace();
+        }     
     }
 
     /**
