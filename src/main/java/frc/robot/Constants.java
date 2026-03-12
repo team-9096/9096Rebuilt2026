@@ -20,11 +20,16 @@ public final class Constants {
     public static final double LOOP_TIME = 0.0;
     public static final double ROBOT_MASS = 0.0;
     public static final Matter CHASSIS = new Matter(new Translation3d(), ROBOT_MASS);
-    public static final double MAX_SPEED = Units.feetToMeters(4.5);
+    public static final double MAX_SPEED = 5.33;
 
   public static class OperatorConstants {
     public static final int DRIVER_CONTROLLER_PORT = 0;
     public static final int OPERATOR_CONTROLLER_PORT = 1;
     public static final double DEADBAND = 0.2;
+  }
+
+  public static class MechanismConstants {
+    public static final int INTAKE_MOTOR = 20;
+    public static final int INTAKE_PIVOT = 21;
   }
 }

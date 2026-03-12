@@ -27,7 +27,7 @@ public class RobotContainer {
   private final CommandXboxController operatorController =
     new CommandXboxController(OperatorConstants.OPERATOR_CONTROLLER_PORT);
 
-  private final SwerveSubsystem drivebase = new SwerveSubsystem();
+  public final SwerveSubsystem drivebase = new SwerveSubsystem();
 
   /**
    * Converts driver input into a field-relative ChassisSpeeds that is
@@ -35,9 +35,9 @@ public class RobotContainer {
    */
   SwerveInputStream driveAngularVelocity = 
     SwerveInputStream.of(drivebase.getSwerveDrive(),
-                         () -> driverController.getLeftY() * -1,
+                         () -> driverController.getLeftY(),
                          () -> driverController.getLeftX() * -1)
-                     .withControllerRotationAxis(driverController::getRightX)
+                     .withControllerRotationAxis(() -> driverController.getRightX())
                      .deadband(OperatorConstants.DEADBAND)
                      .scaleTranslation(0.8)
                      .allianceRelativeControl(true);
@@ -96,7 +96,7 @@ public class RobotContainer {
    */
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    drivebase.setDefaultCommand(drivebase.driveFieldOriented(driveAngularVelocity));
+    drivebase.setDefaultCommand(drivebase.driveFieldOriented(driveDirectAngle));
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
