@@ -7,9 +7,12 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.Drivebase.IntakeCommand;
+import frc.robot.commands.Drivebase.ShooterCommand;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.SwerveSubsystem;
 import swervelib.SwerveInputStream;
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -31,8 +34,10 @@ public class RobotContainer {
 
   public final SwerveSubsystem drivebase = new SwerveSubsystem();
   public final Intake intake = new Intake();
+  public final Shooter shooter = new Shooter();
 
   public final IntakeCommand intakeCommand = new IntakeCommand(intake, () -> operatorController.a().getAsBoolean(), () -> operatorController.b().getAsBoolean(), () -> operatorController.leftBumper().getAsBoolean());
+  public final ShooterCommand shooterCommand = new ShooterCommand(shooter, () -> operatorController.rightBumper().getAsBoolean(), () -> MathUtil.applyDeadband(operatorController.getRightTriggerAxis(), 0.2));
 
   /**
    * Converts driver input into a field-relative ChassisSpeeds that is
@@ -103,6 +108,7 @@ public class RobotContainer {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     drivebase.setDefaultCommand(drivebase.driveFieldOriented(driveDirectAngle));
     intake.setDefaultCommand(intakeCommand);
+    shooter.setDefaultCommand(shooterCommand);
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.

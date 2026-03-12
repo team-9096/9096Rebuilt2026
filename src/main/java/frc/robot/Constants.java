@@ -30,5 +30,6 @@ public final class Constants {
   public static class MechanismConstants {
     public static final int INTAKE_MOTOR = 20;
     public static final int INTAKE_PIVOT = 21;
+    public static final int SHOOTER = 22;
   }
 }
