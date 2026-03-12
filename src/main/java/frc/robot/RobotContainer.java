@@ -6,6 +6,8 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
+import frc.robot.commands.Drivebase.IntakeCommand;
+import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.SwerveSubsystem;
 import swervelib.SwerveInputStream;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -28,6 +30,9 @@ public class RobotContainer {
     new CommandXboxController(OperatorConstants.OPERATOR_CONTROLLER_PORT);
 
   public final SwerveSubsystem drivebase = new SwerveSubsystem();
+  public final Intake intake = new Intake();
+
+  public final IntakeCommand intakeCommand = new IntakeCommand(intake, () -> operatorController.a().getAsBoolean(), () -> operatorController.b().getAsBoolean(), () -> operatorController.leftBumper().getAsBoolean());
 
   /**
    * Converts driver input into a field-relative ChassisSpeeds that is
@@ -97,6 +102,7 @@ public class RobotContainer {
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     drivebase.setDefaultCommand(drivebase.driveFieldOriented(driveDirectAngle));
+    intake.setDefaultCommand(intakeCommand);
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
