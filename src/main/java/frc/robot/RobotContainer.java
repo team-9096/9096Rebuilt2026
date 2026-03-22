@@ -45,8 +45,8 @@ public class RobotContainer {
    */
   SwerveInputStream driveAngularVelocity = 
     SwerveInputStream.of(drivebase.getSwerveDrive(),
-                         () -> driverController.getLeftY(),
-                         () -> driverController.getLeftX() * -1)
+                         () -> driverController.getLeftY() * -1,
+                         () -> driverController.getLeftX())
                      .withControllerRotationAxis(() -> driverController.getRightX())
                      .deadband(OperatorConstants.DEADBAND)
                      .scaleTranslation(0.8)
@@ -57,8 +57,8 @@ public class RobotContainer {
   * fieldRelative input stream.
   */
   SwerveInputStream driveDirectAngle = 
-    driveAngularVelocity.copy().withControllerHeadingAxis(driverController::getRightX,
-                                                          driverController::getRightY)
+    driveAngularVelocity.copy().withControllerHeadingAxis(driverController::getRightY,
+                                                          driverController::getRightX)
                                .headingWhile(true);
 
   /**
@@ -106,7 +106,7 @@ public class RobotContainer {
    */
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    drivebase.setDefaultCommand(drivebase.driveFieldOriented(driveDirectAngle));
+    drivebase.setDefaultCommand(drivebase.driveFieldOriented(driveAngularVelocity));
     intake.setDefaultCommand(intakeCommand);
     shooter.setDefaultCommand(shooterCommand);
 

@@ -46,7 +46,7 @@ public class Robot extends TimedRobot {
     for(int i = 0; i < modules.length; i++) {
       System.out.println(modules[i].getConfiguration().name + ": " + modules[i].getAbsoluteEncoder().getAbsolutePosition());
     }*/
-    System.out.println(m_robotContainer.drivebase.getHeading().getDegrees());
+    //System.out.println(m_robotContainer.drivebase.getHeading().getDegrees());
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
@@ -104,3 +104,7 @@ public class Robot extends TimedRobot {
   @Override
   public void simulationPeriodic() {}
 }
+/*mustard 67 67
+pov in ohio
+67 skibbidy tolet
+gyatt sus /x */ 

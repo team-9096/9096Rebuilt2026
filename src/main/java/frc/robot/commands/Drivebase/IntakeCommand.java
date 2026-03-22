@@ -16,22 +16,23 @@ public class IntakeCommand extends Command {
         this.pivotOut = pivotOut;
         this.intake = intake;
         this.intakeSubsystem = intakeSubsystem;
+        addRequirements(intakeSubsystem);
     }
 
     @Override
     public void execute() {
         if(!intakeSubsystem.pivotOpen() && pivotOut.getAsBoolean()) {
-            intakeSubsystem.pivot(0.5);
+            intakeSubsystem.pivot(0.25);
         }
         else if (!intakeSubsystem.pivotClosed() && pivotIn.getAsBoolean()) {
-            intakeSubsystem.pivot(-0.5);
+            intakeSubsystem.pivot(-0.25);
         }
         else {
             intakeSubsystem.pivot(0);
         }
 
         if (intake.getAsBoolean()) {
-            intakeSubsystem.intake(1);
+            intakeSubsystem.intake(.5);
         }
     }
 

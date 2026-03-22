@@ -15,15 +15,16 @@ public class ShooterCommand extends Command {
         this.shooter = shooter;
         this.shoot = shoot;
         this.shotSpeed = shotSpeed;
+        addRequirements(shooter);
     }
 
     @Override
     public void execute() {
         if(shoot.getAsBoolean()) {
-            shooter.shoot(1);
+            shooter.shoot(-1);
         }
         else {
-            shooter.shoot(shotSpeed.getAsDouble());
+            shooter.shoot(-shotSpeed.getAsDouble());
         }
     }
 }
