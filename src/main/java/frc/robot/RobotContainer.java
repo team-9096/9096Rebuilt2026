@@ -37,7 +37,7 @@ public class RobotContainer {
   public final Shooter shooter = new Shooter();
 
   public final IntakeCommand intakeCommand = new IntakeCommand(intake, () -> operatorController.a().getAsBoolean(), () -> operatorController.b().getAsBoolean(), () -> operatorController.leftBumper().getAsBoolean());
-  public final ShooterCommand shooterCommand = new ShooterCommand(shooter, () -> operatorController.rightBumper().getAsBoolean(), () -> MathUtil.applyDeadband(operatorController.getRightTriggerAxis(), 0.2));
+  public final ShooterCommand shooterCommand = new ShooterCommand(shooter, () -> operatorController.rightBumper().getAsBoolean(), () -> operatorController.x().getAsBoolean(), () -> MathUtil.applyDeadband(operatorController.getRightTriggerAxis(), 0.2));
 
   /**
    * Converts driver input into a field-relative ChassisSpeeds that is

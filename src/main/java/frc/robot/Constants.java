@@ -31,5 +31,6 @@ public final class Constants {
     public static final int INTAKE_MOTOR = 10;
     public static final int INTAKE_PIVOT = 13;
     public static final int SHOOTER = 14;
+    public static final int INDEXER = 0; //TODO: Replace 0 with the motor controller CAN ID
   }
 }
