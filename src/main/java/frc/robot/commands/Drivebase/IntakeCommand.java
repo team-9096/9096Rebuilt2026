@@ -34,6 +34,9 @@ public class IntakeCommand extends Command {
         if (intake.getAsBoolean()) {
             intakeSubsystem.intake(.5);
         }
+        else {
+            intakeSubsystem.intake(0); //Disable intake speed when button is not pressed
+        }
     }
 
 }
