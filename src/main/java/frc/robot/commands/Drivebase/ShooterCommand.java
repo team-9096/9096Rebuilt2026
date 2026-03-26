@@ -23,7 +23,7 @@ public class ShooterCommand extends Command {
     @Override
     public void execute() {
         if(shoot.getAsBoolean()) {
-            shooter.shoot(-0.75);
+            shooter.shoot(-0.5);
         }
         else {
             shooter.shoot(-shotSpeed.getAsDouble());
