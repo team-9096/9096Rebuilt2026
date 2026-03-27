@@ -30,12 +30,11 @@ public class RobotContainer {
   private final CommandXboxController driverController =
     new CommandXboxController(OperatorConstants.DRIVER_CONTROLLER_PORT);
 
-  @SuppressWarnings("unused") //TODO: Remove this
   private final CommandXboxController operatorController =
     new CommandXboxController(OperatorConstants.OPERATOR_CONTROLLER_PORT);
 
   
-  //private final Limelight limelight = new Limelight("limelight");
+  private final Limelight limelight = new Limelight("limelight");
 
   public final SwerveSubsystem drivebase = new SwerveSubsystem();
   public final Intake intake = new Intake();

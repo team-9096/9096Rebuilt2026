@@ -12,7 +12,6 @@ import frc.robot.Constants;
 import frc.robot.subsystems.SwerveSubsystem;
 import swervelib.SwerveController;
 import swervelib.math.SwerveMath;
-import swervelib.SwerveModule;
 
 public class FieldCentricDrive extends Command {
     private final SwerveSubsystem swerve;
