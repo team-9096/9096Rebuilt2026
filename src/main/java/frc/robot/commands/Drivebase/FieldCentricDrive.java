@@ -62,12 +62,6 @@ public class FieldCentricDrive extends Command {
                                            swerve.getSwerveDriveConfiguration());
     SmartDashboard.putNumber("LimitedTranslation", translation.getX());
     SmartDashboard.putString("Translation", translation.toString());
-    SwerveModule modules[] = swerve.getSwerveDrive().getModules();
-    double headings[] = new double[4];
-    for(int i = 0; i < headings.length; i++) {
-      headings[i] = modules[i].getAbsoluteEncoder().getAbsolutePosition();
-    }
-    SmartDashboard.putNumberArray("Headings", headings);
 
     // Make the robot move
     swerve.drive(translation, desiredSpeeds.omegaRadiansPerSecond, true);

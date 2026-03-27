@@ -6,11 +6,13 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
+import frc.robot.commands.Drivebase.FieldCentricDrive;
 import frc.robot.commands.Drivebase.IntakeCommand;
 import frc.robot.commands.Drivebase.ShooterCommand;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.SwerveSubsystem;
+import limelight.Limelight;
 import swervelib.SwerveInputStream;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -32,10 +34,14 @@ public class RobotContainer {
   private final CommandXboxController operatorController =
     new CommandXboxController(OperatorConstants.OPERATOR_CONTROLLER_PORT);
 
+  
+  //private final Limelight limelight = new Limelight("limelight");
+
   public final SwerveSubsystem drivebase = new SwerveSubsystem();
   public final Intake intake = new Intake();
   public final Shooter shooter = new Shooter();
 
+  public final FieldCentricDrive driveCommand = new FieldCentricDrive(drivebase, () -> Math.sin(driverController.getLeftY() * -1 * Math.PI), () -> Math.cos(driverController.getLeftX() * Math.PI), () -> driverController.getRightX());
   public final IntakeCommand intakeCommand = new IntakeCommand(intake, () -> operatorController.a().getAsBoolean(), () -> operatorController.b().getAsBoolean(), () -> operatorController.leftBumper().getAsBoolean());
   public final ShooterCommand shooterCommand = new ShooterCommand(shooter, () -> operatorController.rightBumper().getAsBoolean(), () -> operatorController.x().getAsBoolean(), () -> MathUtil.applyDeadband(operatorController.getRightTriggerAxis(), 0.2));
 
